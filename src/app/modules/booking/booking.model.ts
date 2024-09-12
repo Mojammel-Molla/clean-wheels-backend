@@ -1,4 +1,5 @@
 import { Schema, model, Types } from 'mongoose'
+import { TBooking } from './booking.interface'
 
 const bookingSchema = new Schema({
   customer: {
@@ -52,4 +53,4 @@ const bookingSchema = new Schema({
   },
 })
 
-export const BookingModel = model('Booking', bookingSchema)
+export const BookingModel = model<TBooking>('Booking', bookingSchema)
