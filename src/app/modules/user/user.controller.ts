@@ -8,7 +8,7 @@ const createUser = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: 'Course is created successfully',
+    message: 'User is created successfully',
     data: result,
   })
 })
