@@ -3,6 +3,8 @@ import { SlotControllers } from './slot.controller'
 
 const router = express.Router()
 
-router.post('/services/slots', SlotControllers.createSlot)
+router.post('/', SlotControllers.createSlot)
+router.get('/', SlotControllers.getAllSlots)
+router.get('/:id', SlotControllers.getSingleSlot)
 
 export const SlotRoutes = router
