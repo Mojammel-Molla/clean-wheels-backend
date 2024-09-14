@@ -36,8 +36,32 @@ const getSingleService: RequestHandler = catchAsync(async (req, res) => {
   })
 })
 
+const updateService = catchAsync(async (req, res) => {
+  const { id } = req.params
+  const result = await Services.updateServiceIntoDB(id, req.body)
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'service update successfully',
+    data: result,
+  })
+})
+
+const deleteService = catchAsync(async (req, res) => {
+  const { id } = req.params
+  const result = await Services.deleteServiceFromDB(id)
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Service is deleted successfully',
+    data: result,
+  })
+})
 export const ServiceControllers = {
   createService,
   getAllServices,
   getSingleService,
+  updateService,
+  deleteService,
 }
