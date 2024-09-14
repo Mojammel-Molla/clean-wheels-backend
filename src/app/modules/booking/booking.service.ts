@@ -1,4 +1,3 @@
-import QueryBuilder from '../../builder/QueryBuilder'
 import { TBooking } from './booking.interface'
 import { BookingModel } from './booking.model'
 
