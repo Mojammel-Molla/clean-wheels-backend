@@ -3,8 +3,9 @@ import catchAsync from '../../utils/catchAsync'
 import sendResponse from '../../utils/sendResponse'
 import { UserServices } from './user.service'
 
-const createUser = catchAsync(async (req, res) => {
-  const result = await UserServices.createUserIntoDB(req.body)
+const createUser: RequestHandler = catchAsync(async (req, res) => {
+  const newUser = req.body
+  const result = await UserServices.createUserIntoDB(newUser)
 
   sendResponse(res, {
     statusCode: 200,
