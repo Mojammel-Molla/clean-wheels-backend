@@ -16,6 +16,7 @@ const createBooking: RequestHandler = catchAsync(async (req, res) => {
 })
 
 const getAllBookings: RequestHandler = catchAsync(async (req, res) => {
+  console.log('test', req.user)
   const result = await BookingServices.getAllBookingsFromDB()
 
   sendResponse(res, {

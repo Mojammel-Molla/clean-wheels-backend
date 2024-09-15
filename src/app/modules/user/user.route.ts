@@ -6,11 +6,11 @@ import userValidationSchema from './user.validation'
 const router = express.Router()
 
 router.post(
-  '/signup',
+  '/',
   validateRequest(userValidationSchema),
   UserControllers.createUser
 )
-router.get('/signup', UserControllers.getAllUsers)
-router.get('/signup/:id', UserControllers.getSingleUser)
+router.get('/', UserControllers.getAllUsers)
+router.get('/:id', UserControllers.getSingleUser)
 
 export const UserRoutes = router
