@@ -8,18 +8,29 @@ const createBookingIntoDB = async (payload: TBooking) => {
 
 const getAllBookingsFromDB = async () => {
   const result = await BookingModel.find()
+    .populate('customer')
+    .populate('service')
+    .populate('slot')
+
   return result
 }
 
 const getSingleBookingFromDB = async (id: string) => {
-  const result = await BookingModel.findOne({ _id: id }).populate('customer')
-  // .populate('Service')
-  // .populate('Customer')
+  const result = await BookingModel.findOne({ _id: id })
+  return result
+}
+
+const getMyBookingsFromDB = async (id: string) => {
+  const result = await BookingModel.find({ customer: id })
+    .populate('service')
+    .populate('slot')
+
   return result
 }
 
 export const BookingServices = {
   createBookingIntoDB,
   getAllBookingsFromDB,
+  getMyBookingsFromDB,
   getSingleBookingFromDB,
 }

@@ -27,6 +27,25 @@ const getAllBookings: RequestHandler = catchAsync(async (req, res) => {
   })
 })
 
+const getMyBooking: RequestHandler = catchAsync(async (req, res) => {
+  const { id } = req.params
+  const bookings = await BookingServices.getMyBookingsFromDB(id)
+
+  if (!bookings.length) {
+    return res.status(404).json({
+      success: false,
+      message: 'No bookings found for this user',
+    })
+  }
+
+  return sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'My Bookings retrieve successfully',
+    data: bookings,
+  })
+})
+
 const getSingleBooking: RequestHandler = catchAsync(async (req, res) => {
   const { id } = req.params
   const result = await BookingServices.getSingleBookingFromDB(id)
@@ -37,9 +56,9 @@ const getSingleBooking: RequestHandler = catchAsync(async (req, res) => {
     data: result,
   })
 })
-
 export const BookingControllers = {
   createBooking,
   getAllBookings,
+  getMyBooking,
   getSingleBooking,
 }

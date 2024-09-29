@@ -32,4 +32,25 @@ const slotSchema = new Schema(
   }
 )
 
+slotSchema.pre('save', async function (next) {
+  // const slot = this
+
+  // Check if a slot already exists with the same service, date, start time, and end time
+  const existingSlot = await SlotModel.findOne({
+    service: this.service,
+    date: this.date,
+    startTime: this.startTime,
+    endTime: this.endTime,
+  })
+
+  if (existingSlot) {
+    const error = new Error(
+      'A slot with the same service, date, and time already exists'
+    )
+    return next(error)
+  }
+
+  next()
+})
+
 export const SlotModel = model<TSlot>('Slot', slotSchema)

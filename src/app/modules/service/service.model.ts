@@ -26,4 +26,23 @@ const serviceSchema = new Schema(
   }
 )
 
+// Pre-save middleware to check for duplicates
+serviceSchema.pre('save', async function (next) {
+  // const service = this
+
+  // Check if the service with the same name already exists
+  const existingService = await ServiceModel.findOne({
+    name: this.name,
+    isDeleted: false,
+  })
+
+  if (existingService) {
+    const error = new Error('Service with this name already exists')
+    return next(error)
+  }
+
+  // Proceed to save if no duplicates are found
+  next()
+})
+
 export const ServiceModel = model<TService>('Service', serviceSchema)
